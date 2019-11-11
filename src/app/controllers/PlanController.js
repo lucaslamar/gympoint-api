@@ -4,15 +4,11 @@ import Plan from '../models/Plan';
 
 class PlanController {
     async index(req, res) {
-        try {
-            const listPlan = await Plan.findAll({
-                order: ['duration'],
-                attributes: ['id', 'title', 'duration', 'price'],
-            });
-            return res.json(listPlan);
-        } catch (error) {
-            return res.status(400).json({ error: 'Search failed.' });
-        }
+        const listPlan = await Plan.findAll({
+            order: ['duration'],
+            attributes: ['id', 'title', 'duration', 'price'],
+        });
+        return res.json(listPlan);
     }
 
     async store(req, res) {
@@ -33,24 +29,21 @@ class PlanController {
         if (PlanExist) {
             return res.status(400).json({ error: 'Plan already exists.' });
         }
-        try {
-            const { title, duration, price } = req.body;
 
-            const { id } = await Plan.create({
-                title,
-                duration,
-                price,
-            });
+        const { title, duration, price } = req.body;
 
-            return res.status(200).json({
-                id,
-                title,
-                duration,
-                price,
-            });
-        } catch (error) {
-            return res.status(400).json({ error: 'Create failed.' });
-        }
+        const { id } = await Plan.create({
+            title,
+            duration,
+            price,
+        });
+
+        return res.status(200).json({
+            id,
+            title,
+            duration,
+            price,
+        });
     }
 
     async update(req, res) {
@@ -72,17 +65,13 @@ class PlanController {
             return res.status(400).json({ error: 'Plan not found.' });
         }
 
-        try {
-            const { title, duration, price } = await plan.update(req.body);
+        const { title, duration, price } = await plan.update(req.body);
 
-            return res.status(200).json({
-                title,
-                duration,
-                price,
-            });
-        } catch (error) {
-            return res.status(400).json({ error: 'Create failed.' });
-        }
+        return res.status(200).json({
+            title,
+            duration,
+            price,
+        });
     }
 
     async delete(req, res) {
@@ -94,12 +83,8 @@ class PlanController {
             return res.status(400).json({ error: 'Plan not found.' });
         }
 
-        try {
-            await plan.destroy(id);
-            return res.status(200).json({ sucess: 'Deleted with sucess.' });
-        } catch (error) {
-            return res.status(400).json({ erro: 'Delete failed.' });
-        }
+        await plan.destroy(id);
+        return res.status(200).json({ sucess: 'Deleted with sucess.' });
     }
 }
 
