@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "gympoint",
+      "dialect": "PostgreSQL",
+      "name": "gympoint",
+      "password": "docker",
+      "port": 5432,
+      "server": "localhost",
+      "username": "postgres"
+    }
+  ]
+}
