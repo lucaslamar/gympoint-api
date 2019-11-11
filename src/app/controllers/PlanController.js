@@ -2,7 +2,10 @@ import Plan from '../models/Plan';
 
 class PlanController {
     async index(req, res) {
-        return res.json({});
+        const listPlan = await Plan.findAll({
+            attributes: ['title', 'duration', 'price'],
+        });
+        return res.json(listPlan);
     }
 
     async store(req, res) {
@@ -23,7 +26,15 @@ class PlanController {
     }
 
     async update(req, res) {
-        return res.json({});
+        const { id } = req.params;
+        const plan = await Plan.findByPk(id);
+        const { title, duration, price } = await plan.update(req.body);
+
+        return res.json({
+            title,
+            duration,
+            price,
+        });
     }
 
     async delete(req, res) {
