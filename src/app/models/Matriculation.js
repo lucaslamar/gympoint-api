@@ -8,7 +8,7 @@ class Matriculation extends Model {
                 plan_id: Sequelize.INTEGER,
                 start_date: Sequelize.DATE,
                 end_date: Sequelize.DATE,
-                price: Sequelize.FLOAT,
+                price: Sequelize.DECIMAL,
             },
             {
                 sequelize,
