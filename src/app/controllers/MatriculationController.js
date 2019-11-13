@@ -55,7 +55,30 @@ class MatriculationController {
     }
 
     async update(req, res) {
-        return res.json({});
+        const { start_date } = req.body;
+        const matriculation = await Matriculation.findByPk(req.params.id);
+
+        if (!matriculation) {
+            return res.status(404).json({ error: 'Matriculation not found' });
+        }
+        const plan = await Plan.findByPk(req.body.plan_id);
+
+        if (!plan) {
+            return res.status(404).json({ error: 'Plan does not exist' });
+        }
+
+        const price = plan.price * plan.duration;
+        const end_date = addMonths(parseISO(start_date), plan.duration);
+
+        await matriculation.update({
+            price,
+            end_date,
+            ...req.body,
+        });
+
+        return res.json({
+            matriculation,
+        });
     }
 
     async delete(req, res) {
