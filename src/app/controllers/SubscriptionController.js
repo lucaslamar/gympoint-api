@@ -12,6 +12,18 @@ class SubscriptionController {
             order: ['start_date'],
             limit: 15,
             offset: (page - 1) * 15,
+            include: [
+                {
+                    model: Student,
+                    as: 'student',
+                    attributes: ['id', 'name', 'email'],
+                },
+                {
+                    model: Plan,
+                    as: 'plan',
+                    attributes: ['id', 'title', 'duration'],
+                },
+            ],
         });
 
         return res.json(subscriptionList);
