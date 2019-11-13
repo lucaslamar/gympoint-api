@@ -4,7 +4,15 @@ import Student from '../models/Student';
 class StudentController {
     async store(req, res) {
         const schema = Yup.object().shape({
-            name: Yup.string().required(),
+            name: Yup.string()
+                .transform((val, original) =>
+                    val
+                        .toLowerCase()
+                        .split(' ')
+                        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ')
+                )
+                .required(),
             email: Yup.string()
                 .email()
                 .required(),
@@ -25,12 +33,8 @@ class StudentController {
             return res.status(400).json({ error: 'User already exists.' });
         }
 
-        try {
-            const student = await Student.create(req.body);
-            return res.status(200).json(student);
-        } catch (error) {
-            return res.status(400).json({ error: 'Create failed.' });
-        }
+        const student = await Student.create(req.body);
+        return res.status(200).json(student);
     }
 
     async update(req, res) {
@@ -56,21 +60,17 @@ class StudentController {
             return res.status(400).json({ error: 'Student not found.' });
         }
 
-        try {
-            const { name, email, age, weight, height } = await student.update(
-                req.body
-            );
+        const { name, email, age, weight, height } = await student.update(
+            req.body
+        );
 
-            return res.json({
-                name,
-                email,
-                age,
-                weight,
-                height,
-            });
-        } catch (error) {
-            return res.json(400).json({ erro: 'Update failed.' });
-        }
+        return res.json({
+            name,
+            email,
+            age,
+            weight,
+            height,
+        });
     }
 }
 

@@ -1,10 +1,10 @@
 import { addMonths, parseISO, isBefore } from 'date-fns';
 
-import Matriculation from '../models/Matriculation';
+import Subscription from '../models/Subscription';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
 
-class MatriculationController {
+class SubscriptionController {
     async index(req, res) {
         return res.json({});
     }
@@ -24,11 +24,11 @@ class MatriculationController {
             return res.status(404).json({ error: 'Student does not exist' });
         }
 
-        const studentMatriculationExist = await Matriculation.findOne({
+        const studentSubscriptionExist = await Subscription.findOne({
             where: { student_id: student.id },
         });
 
-        if (studentMatriculationExist) {
+        if (studentSubscriptionExist) {
             return res
                 .status(400)
                 .json({ error: `${student.name} already enrolled` });
@@ -43,7 +43,7 @@ class MatriculationController {
         const price = plan.price * plan.duration;
         const end_date = addMonths(parseISO(start_date), plan.duration);
 
-        const matriculation = await Matriculation.create({
+        const subscription = await Subscription.create({
             student_id,
             plan_id,
             start_date,
@@ -51,15 +51,15 @@ class MatriculationController {
             end_date,
         });
 
-        return res.json(matriculation);
+        return res.json(subscription);
     }
 
     async update(req, res) {
         const { start_date } = req.body;
-        const matriculation = await Matriculation.findByPk(req.params.id);
+        const subscription = await Subscription.findByPk(req.params.id);
 
-        if (!matriculation) {
-            return res.status(404).json({ error: 'Matriculation not found' });
+        if (!subscription) {
+            return res.status(404).json({ error: 'Subscription not found' });
         }
         const plan = await Plan.findByPk(req.body.plan_id);
 
@@ -70,28 +70,28 @@ class MatriculationController {
         const price = plan.price * plan.duration;
         const end_date = addMonths(parseISO(start_date), plan.duration);
 
-        await matriculation.update({
+        await subscription.update({
             price,
             end_date,
             ...req.body,
         });
 
         return res.json({
-            matriculation,
+            subscription,
         });
     }
 
     async delete(req, res) {
-        const matriculation = await Matriculation.findByPk(req.params.id);
+        const subscription = await Subscription.findByPk(req.params.id);
 
-        if (!matriculation) {
-            return res.status(404).json({ error: 'Matriculation not found' });
+        if (!subscription) {
+            return res.status(404).json({ error: 'Subscription not found' });
         }
 
-        await matriculation.destroy();
+        await subscription.destroy();
 
         return res.json('Successfully deleted');
     }
 }
 
-export default new MatriculationController();
+export default new SubscriptionController();
