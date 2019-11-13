@@ -82,7 +82,15 @@ class MatriculationController {
     }
 
     async delete(req, res) {
-        return res.json({});
+        const matriculation = await Matriculation.findByPk(req.params.id);
+
+        if (!matriculation) {
+            return res.status(404).json({ error: 'Matriculation not found' });
+        }
+
+        await matriculation.destroy();
+
+        return res.json('Successfully deleted');
     }
 }
 
