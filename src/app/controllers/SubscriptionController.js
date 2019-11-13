@@ -6,7 +6,15 @@ import Plan from '../models/Plan';
 
 class SubscriptionController {
     async index(req, res) {
-        return res.json({});
+        const { page = 1 } = req.body;
+
+        const subscriptionList = await Subscription.findAll({
+            order: ['start_date'],
+            limit: 15,
+            offset: (page - 1) * 15,
+        });
+
+        return res.json(subscriptionList);
     }
 
     async store(req, res) {
