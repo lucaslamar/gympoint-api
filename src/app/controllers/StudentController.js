@@ -4,15 +4,7 @@ import Student from '../models/Student';
 class StudentController {
     async store(req, res) {
         const schema = Yup.object().shape({
-            name: Yup.string()
-                .transform((val, original) =>
-                    val
-                        .toLowerCase()
-                        .split(' ')
-                        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-                        .join(' ')
-                )
-                .required(),
+            name: Yup.string().required(),
             email: Yup.string()
                 .email()
                 .required(),

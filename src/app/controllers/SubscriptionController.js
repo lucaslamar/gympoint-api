@@ -4,6 +4,9 @@ import Subscription from '../models/Subscription';
 import Student from '../models/Student';
 import Plan from '../models/Plan';
 
+import SubscriptionEmail from '../jobs/SubscriptionEmail';
+import Queue from '../../lib/Queue';
+
 class SubscriptionController {
     async index(req, res) {
         const { page = 1 } = req.body;
@@ -69,6 +72,12 @@ class SubscriptionController {
             start_date,
             price,
             end_date,
+        });
+
+        await Queue.add(SubscriptionEmail.key, {
+            subscription,
+            student,
+            plan,
         });
 
         return res.json(subscription);
