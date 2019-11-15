@@ -27,7 +27,7 @@ routes.post('/subscriptions', SubscriptionController.store);
 routes.put('/subscriptions/:id', SubscriptionController.update);
 routes.delete('/subscriptions/:id', SubscriptionController.delete);
 
-routes.get('/checkins', CheckinController.index);
-routes.post('/checkins', CheckinController.store);
+routes.get('/students/:id/checkins', CheckinController.index);
+routes.post('/students/:id/checkins', CheckinController.store);
 
 export default routes;
