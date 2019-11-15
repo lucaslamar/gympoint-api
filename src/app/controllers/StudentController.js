@@ -25,12 +25,8 @@ class StudentController {
             return res.status(400).json({ error: 'User already exists.' });
         }
 
-        try {
-            const student = await Student.create(req.body);
-            return res.status(200).json(student);
-        } catch (error) {
-            return res.status(400).json({ error: 'Create failed.' });
-        }
+        const student = await Student.create(req.body);
+        return res.status(200).json(student);
     }
 
     async update(req, res) {
@@ -56,21 +52,17 @@ class StudentController {
             return res.status(400).json({ error: 'Student not found.' });
         }
 
-        try {
-            const { name, email, age, weight, height } = await student.update(
-                req.body
-            );
+        const { name, email, age, weight, height } = await student.update(
+            req.body
+        );
 
-            return res.json({
-                name,
-                email,
-                age,
-                weight,
-                height,
-            });
-        } catch (error) {
-            return res.json(400).json({ erro: 'Update failed.' });
-        }
+        return res.json({
+            name,
+            email,
+            age,
+            weight,
+            height,
+        });
     }
 }
 
