@@ -10,6 +10,8 @@ Faça o clone do projeto e execute os comando abaixo.
 
 `docker run --name gympoint-redis -p 6379:6379 -d -t redis:alpine` - cria um container do redis
 
+`docker run --name mongogympoint  -p 27017:27017 -d -t mongo` - cria um container do mongo
+
 `yarn sequelize db:migrate` - executa as migrações
 
 `yarn sequelize db:seed:all` - roda todas as seeds
