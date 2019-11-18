@@ -6,9 +6,9 @@
 > O GymPoint é um sistema de gerenciamento de academia
 
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-02/blob/master/README.md#desafio-02-iniciando-aplica%C3%A7%C3%A3o"><img alt="Desafio 2" src="https://img.shields.io/badge/gympoint-desafio%202-brightgreen"> </a><a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-03/blob/master/README.md#desafio-03-continuando-aplica%C3%A7%C3%A3o"><img alt="Desafio 3" src="https://img.shields.io/badge/gympoint-desafio%203-brightgreen"></a>
+
+
 
 O GymPoint é um sistema de gerenciamento de academia que permite ao administrador cadastrado na aplicação as sequintes funcionalidades:
 - Cadastro de Alunos (cadastrados/atualizados)
@@ -16,64 +16,64 @@ O GymPoint é um sistema de gerenciamento de academia que permite ao administrad
 - Gestão de Matriculas (listagem/cadastro/atualização/remoção de planos)
 - Responder pedidos de auxilio
 
-O GymPoint também permite que os alunos possam fazer Checkins e Pedidos de auxílio via email
-
-![](../header.png)
+O GymPoint também permite que os alunos possam fazer:
+- Checkins
+- Pedidos de auxílio via email
 
  ## Começando
 
-    Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento.
+ <h3>Pré-requisitos</h3>
 
-<h3> Pré-requisitos </h3>
+<ul>
+    <li> <a href="https://nodejs.org/en/download/package-manager/"> NodeJS </a></li>
+    <li> <a href="https://yarnpkg.com/en/docs/getting-started">Yarn</a> </li>
+    <li> <a href="https://www.docker.com/get-started"> Docker </a> </li>
+    <li> <a href="https://hub.docker.com/_/postgres">PostgreSQL</a> </li>
+    <li> <a href="https://hub.docker.com/_/mongo">MongoDB</a> </li>
+    <li> <a href="https://hub.docker.com/_/redis"> Redis </a> </li>
+</ul>
 
-<h4> NodeJS </h4>
-
-Você precisa instalar o NodeJS no seu computador antes de poder usar "** Gympoint **". Você pode instalar o NodeJS seguindo <a href="https://nodejs.org/en/download/package-manager/"> estas instruções </a>.
-
-Depois de concluir o processo de instalação, tente digitar ** `` `npm -v``` ** na linha de comando. Você deve obter uma resposta com a versão do NodeJS.
-
-<h4> Yarn </h4>
-
-Depois de instalar os NodeJs, você precisará instalar o Yarn. Você pode instalar o Yarn seguindo <a href="https://yarnpkg.com/en/docs/getting-started"> estas instruções </a>.
-
-Após a instalação, tente digitar ** `` `yarn -v``` ** na linha de comando. Você deve obter uma resposta com a versão do Yarn.
-
-<h4> Docker </h4>
-
-Você precisa instalar o Docker no seu computador antes de poder usar "** Gympoint **". Você pode instalar o Docker seguindo <a href="https://www.docker.com/get-started"> estas instruções </a>.
-
+<h4>REST API Client</h4>
+<ul>
+  <li><a href="https://insomnia.rest/">Insomnia</a></li>
+  <li><a href="https://www.getpostman.com/">Postman</a></li>
+  <li><a href="https://install.advancedrestclient.com/install">Advanced REST Client</a></li>
+</ul>
 
 
 ## Configuração para Desenvolvimento
 
-Descreva como instalar todas as dependências para desenvolvimento e como rodar um test-suite automatizado de algum tipo. Se necessário, faça isso para múltiplas plataformas.
+Depois de clonar repositorio e instalar os pre requisitos
 
-```sh
-make install
-npm test
-```
+- Run **`yarn`** to install dependencies;
+- Crie uma **postgres** database;
+- Crie uma **redis** database;
+- Crie umm arquivo **`.env`** baseado **`.env.example`**;
+- Ponha suas credencias **`.env`**;
+- Rode **`yarn sequelize db:migrate`** para criar as migraçoes ;
+- rode **`yarn sequelize db:seed:all`** para criar uma seed;
+- rode **`yarn dev`** para iniciar a aplicação;
+- rode **`yarn queue`** em outro terminal para iniciar as filas.
+
+Agora você pode usar a REST API Client para testar "**Gympoint**".
+
+## Construido com
+<ul>
+  <li>NodeJS</li>
+  <li>Docker</li>
+  <li>PostgreSQL</li>
+  <li>Mailtrap.io</li>
+  <li>Redis</li>
+  <li>MongoDB</li>
+</ul>
+
+## Ferramentas
+<ul>
+  <li>Sucrase + Nodemon;</li>
+  <li>ESLint + Prettier + EditorConfig;</li>
+  <li>Sequelize</li>
+</ul>
 
 
 
-## Meta
 
-Seu Nome – [@SeuNome](https://twitter.com/...) – SeuEmail@exemplo.com
-
-Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
-
-[https://github.com/yourname/github-link](https://github.com/othonalberto/)
-
-## Contributing
-
-1. Faça o _fork_ do projeto (<https://github.com/yourname/yourproject/fork>)
-2. Crie uma _branch_ para sua modificação (`git checkout -b feature/fooBar`)
-3. Faça o _commit_ (`git commit -am 'Add some fooBar'`)
-4. _Push_ (`git push origin feature/fooBar`)
-5. Crie um novo _Pull Request_
-
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/seunome/seuprojeto/wiki
