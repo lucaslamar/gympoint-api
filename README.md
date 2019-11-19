@@ -73,7 +73,3 @@ Agora você pode usar a REST API Client para testar "**Gympoint**".
   <li>ESLint + Prettier + EditorConfig;</li>
   <li>Sequelize</li>
 </ul>
-
-
-
-
